@@ -44,24 +44,21 @@ namespace EQWaypoint
 
         public float getXPos()
         {
-            MemoryLoc Pxaxis = new MemoryLoc(eqproc, addrbase + 0x782DEC);
-            MemoryLoc cur_xaxis = new MemoryLoc(eqproc, Pxaxis.GetInt32());
+            MemoryLoc cur_xaxis = new MemoryLoc(eqproc, pLoc() + 0x74);
 
             return cur_xaxis.GetFloat();
         }
 
         public float getYPos()
         {
-            MemoryLoc Pyaxis = new MemoryLoc(eqproc, addrbase + 0x789600);
-            MemoryLoc cur_yaxis = new MemoryLoc(eqproc, Pyaxis.GetInt32());
+            MemoryLoc cur_yaxis = new MemoryLoc(eqproc, pLoc() + 0x7C);
 
             return cur_yaxis.GetFloat();
         }
 
         public float getZPos()
         {
-            MemoryLoc Pzaxis = new MemoryLoc(eqproc, addrbase + 0x7453C8);
-            MemoryLoc cur_zaxis = new MemoryLoc(eqproc, Pzaxis.GetInt32()+ 0x130);
+            MemoryLoc cur_zaxis = new MemoryLoc(eqproc, pLoc() + 0x78);
 
             return cur_zaxis.GetFloat();
         }
@@ -73,14 +70,16 @@ namespace EQWaypoint
 
         public float getHeading()
         {
-            MemoryLoc Pheading = new MemoryLoc(eqproc, addrbase + 0xD5DB0C);
-            MemoryLoc h1 = new MemoryLoc(eqproc, Pheading.GetInt32() + 0x778);
-            MemoryLoc h2 = new MemoryLoc(eqproc, h1.GetInt32() + 0xF8);
-            MemoryLoc h3 = new MemoryLoc(eqproc, h2.GetInt32() + 0xF8);
-            MemoryLoc h4 = new MemoryLoc(eqproc, h3.GetInt32() + 0xE4);
-            MemoryLoc heading = new MemoryLoc(eqproc, h4.GetInt32() + 0x3E0);
+            MemoryLoc heading = new MemoryLoc(eqproc, pLoc() + 0x8);
 
             return heading.GetFloat();
+        }
+
+        private Int32 pLoc()
+        {
+            MemoryLoc Ploc = new MemoryLoc(eqproc, addrbase + 0x165DE0);
+
+            return Ploc.GetInt32();
         }
 
     }
